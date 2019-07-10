@@ -103,3 +103,18 @@ rule tpm_matrix:
         "../envs/sleuth.yaml"
     script:
         "../scripts/sleuth-to-matrix.R"
+
+
+rule plot_volcano:
+    input:
+        "sleuth/{model}.rds"
+    output:
+        report("plots/volcano/{model}.volcano.pdf", caption="../report/plot_volcano.rst", category="Quality Control")
+    params:
+        model = get_model,
+        sig_level = config["volcano_plot"]["sig_level"],
+        point_alpha = config["volcano_plot"]["point_alpha"]
+    conda:
+        "../envs/sleuth.yaml"
+    script:
+        "../scripts/plot-volcano.R"

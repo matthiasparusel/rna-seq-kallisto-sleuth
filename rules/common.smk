@@ -40,9 +40,7 @@ def is_single_end(sample, unit):
 
 def get_fastqs(wildcards):
     """Get raw FASTQ files from unit sheet."""
-    u = units.loc[ (wildcards.sample, wildcards.unit), ["fq1", "fq2"] ].dropna()
-    data_path="data/raw"
-    return [ f"{data_path}/{u.fq1}", f"{data_path}/{u.fq2}" ]
+    return units.loc[ (wildcards.sample, wildcards.unit), ["fq1", "fq2"] ].dropna()
 
 def get_trimmed(wildcards):
     if not is_single_end(**wildcards):

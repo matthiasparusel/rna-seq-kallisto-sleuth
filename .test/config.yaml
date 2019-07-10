@@ -18,7 +18,18 @@ diffexp:
   FDR: 0.2
   # model for sleuth differential expression analysis
   models:
-    by-condition: ~condition
+    by-condition:
+      full: ~condition
+      reduced: ~1
+
+bootstrap_plots:
+  color_by: condition
+
+volcano_plot:
+  # the significance level for Fdr
+  sig_level: 0.1
+  # the alpha for the points
+  point_alpha: 0.2
 
 params:
   kallisto: "-b 100"
