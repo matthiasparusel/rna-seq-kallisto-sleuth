@@ -15,6 +15,6 @@ so <- sleuth_fit(so, as.formula(model[["reduced"]]), 'reduced')
 so <- sleuth_wt(so, "conditionuntreated")
 
 plot_volcano(so, test = "conditionuntreated", test_type = "wt", which_model = "full",
-             sig_level = 0.1, point_alpha = 0.2, sig_color = "orange")
+             sig_level = sl, point_alpha = pa, sig_color = "orange")
 
 dev.off()
