@@ -137,3 +137,13 @@ rule plot_fragment_length_dist:
         "../envs/sleuth.yaml"
     script:
         "../scripts/plot-fld.R"
+
+rule plot_mean_var:
+    input:
+        "analysis/sleuth/{model}.rds"
+    output:
+        report("analysis/plots/mean-var/{model}.mean-var.pdf")
+    conda:
+        "../envs/sleuth.yaml"
+    script:
+        "../scripts/plot-mean-var.R"
