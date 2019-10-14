@@ -103,3 +103,18 @@ rule tpm_matrix:
         "../envs/sleuth.yaml"
     script:
         "../scripts/sleuth-to-matrix.R"
+
+
+rule plot_vars:
+    input:
+        "sleuth/{model}.rds"
+    output:
+        report("plots/vars/{model}.vars.pdf", caption="../report/plot_vars.rst")
+    params:
+        model = get_model,
+        sig_level = config["plot_vars"]["sig_level"],
+        point_alpha = config["plot_vars"]["point_alpha"],
+    conda:
+        "../envs/sleuth.yaml"
+    script:
+        "../scripts/plot-vars.R"

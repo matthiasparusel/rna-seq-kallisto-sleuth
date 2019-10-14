@@ -40,9 +40,7 @@ def is_single_end(sample, unit):
 
 def get_fastqs(wildcards):
     """Get raw FASTQ files from unit sheet."""
-    u = units.loc[ (wildcards.sample, wildcards.unit), ["fq1", "fq2"] ].dropna()
-    data_path="data/raw"
-    return [ f"{data_path}/{u.fq1}", f"{data_path}/{u.fq2}" ]
+    return units.loc[ (wildcards.sample, wildcards.unit), ["fq1", "fq2"] ].dropna()
 
 def get_trimmed(wildcards):
     if not is_single_end(**wildcards):
@@ -65,7 +63,7 @@ def get_bootstrap_plots(model, gene_list=None):
             checkpoints.sleuth_diffexp.get(model=model).output[0], sep="\t")
         # group transcripts by gene
         if gene_list is None:
-            results = results[results.qval <= config["bootstrap_plots"]["FDR"]][:config["bootstrap_plots"]["top_n"]] 
+            results = results[results.qval <= config["bootstrap_plots"]["FDR"]][:config["bootstrap_plots"]["top_n"]]
             genes = set(results.ext_gene)
         else:
             genes = set(gene_list)
